@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/color.dart';
 import '../widgets/app_bar.dart';
@@ -119,8 +120,21 @@ class ContactScreen extends StatelessWidget {
                     children: [
                       IconButton(
                         icon: Image.asset('assets/icons/email.png', width: 40),
-                        onPressed: () {
-                          // Launch email
+                        onPressed: () async {
+                          final Uri emailUri = Uri(
+                            scheme: 'mailto',
+                            path: 'ogundipeibukun51@gmail.com',
+                            queryParameters: {
+                              'subject': 'Hello!',
+                              'body': 'I wanted to reach out to you...',
+                            },
+                          );
+
+                          if (await canLaunchUrl(emailUri)) {
+                          await launchUrl(emailUri);
+                          } else {
+                          throw 'Could not launch $emailUri';
+                          }
                         },
                       ),
                       const SizedBox(width: 20),
