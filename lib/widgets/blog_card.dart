@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio/models/blog_post.dart';
-import 'package:flutter_portfolio/constants/colors.dart';
+
+import '../constants/color.dart';
+import '../models/blog_post.dart';
 
 class BlogCard extends StatelessWidget {
   final BlogPost blogPost;

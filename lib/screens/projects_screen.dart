@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio/widgets/app_bar.dart';
-import 'package:flutter_portfolio/widgets/footer.dart';
-import 'package:flutter_portfolio/widgets/project_card.dart';
-import 'package:flutter_portfolio/data/projects_data.dart';
 
 import '../constants/color.dart';
+import '../data/projects_data.dart';
 import '../widgets/app_bar.dart';
+import '../widgets/footer.dart';
+import '../widgets/project_card.dart';
+
 
 class ProjectsScreen extends StatelessWidget {
   const ProjectsScreen({super.key});
@@ -20,6 +20,7 @@ class ProjectsScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Animated Hero Section
             Container(
               padding: EdgeInsets.symmetric(
                 horizontal: isMobile ? 20 : 100,
@@ -27,20 +28,33 @@ class ProjectsScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Text(
-                    'My Projects',
-                    style: TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                      color: CustomColors.primaryDark,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Here are all the projects I\'ve worked on',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: CustomColors.secondaryDark,
+                  AnimatedOpacity(
+                    opacity: 1.0,
+                    duration: const Duration(milliseconds: 800),
+                    child: AnimatedSlide(
+                      duration: const Duration(milliseconds: 800),
+                      offset: const Offset(0, 0),
+                      curve: Curves.easeOutQuart,
+                      child: Column(
+                        children: [
+                          Text(
+                            'My Projects',
+                            style: TextStyle(
+                              fontSize: 36,
+                              fontWeight: FontWeight.bold,
+                              color: CustomColors.primaryDark,
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Here are all the projects I\'ve worked on',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: CustomColors.secondaryDark,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 50),
@@ -57,9 +71,19 @@ class ProjectsScreen extends StatelessWidget {
                       ),
                       itemCount: projects.length,
                       itemBuilder: (context, index) {
-                        return ProjectCard(
-                          project: projects[index],
-                          isPreview: false,
+                        // Staggered animation for each project card
+                        return AnimatedOpacity(
+                          opacity: 1.0,
+                          duration: Duration(milliseconds: 500 + (index * 200)),
+                          child: AnimatedSlide(
+                            duration: Duration(milliseconds: 500 + (index * 200)),
+                            curve: Curves.easeOut,
+                            offset: const Offset(0, 0),
+                            child: ProjectCard(
+                              project: projects[index],
+                              isPreview: false,
+                            ),
+                          ),
                         );
                       },
                     ),

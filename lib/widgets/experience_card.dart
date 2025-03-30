@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio/models/experience.dart';
-import 'package:flutter_portfolio/constants/colors.dart';
+
+import '../constants/color.dart';
+import '../models/experience.dart';
 
 class ExperienceCard extends StatelessWidget {
   final Experience experience;

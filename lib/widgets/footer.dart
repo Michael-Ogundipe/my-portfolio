@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio/constants/colors.dart';
+
+import '../constants/color.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});

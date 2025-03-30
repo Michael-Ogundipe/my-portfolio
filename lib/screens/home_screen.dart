@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:url_launcher/url_launcher.dart';
-// import 'package:flutter_portfolio/widgets/footer.dart';
-// import 'package:flutter_portfolio/screens/projects_screen.dart';
-// import 'package:flutter_portfolio/screens/experience_screen.dart';
-// import 'package:flutter_portfolio/screens/blog_screen.dart';
-// import 'package:flutter_portfolio/screens/contact_screen.dart';
+import 'package:mie_portfolio/screens/project_section.dart';
+import 'package:mie_portfolio/widgets/project_card.dart';
 
 import '../constants/color.dart';
+import '../data/projects_data.dart';
 import '../widgets/app_bar.dart';
+import '../widgets/footer.dart';
+import 'acticle_section.dart';
+import 'blog_screen.dart';
+import 'contact_screen.dart';
+import 'projects_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,7 +22,7 @@ class HomeScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: const CustomAppBar(),
-    //  drawer: isMobile ? _buildDrawer(context) : null,
+      drawer: isMobile ? _buildDrawer(context) : null,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -38,31 +40,31 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Hi, I\'m John Doe',
+                            'Michael Ogundipe',
                             style: TextStyle(
-                              fontSize: 48,
+                              fontSize: 28,
                               fontWeight: FontWeight.bold,
                               color: CustomColors.primaryDark,
                             ),
                           ),
-                          const SizedBox(height: 20),
+                          const SizedBox(height: 8),
                           Text(
-                            'Building Scalable Flutter Apps with a Touch of AI',
+                            'Flutter Engineer',
                             style: TextStyle(
                               fontSize: 24,
                               color: CustomColors.secondaryDark,
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          const SizedBox(height: 16),
                           Text(
-                            'I\'m a Flutter developer passionate about creating beautiful, performant mobile and web applications. With 3 years of experience, I specialize in cross-platform development and AI integration.',
+                            "I'm a skilled, and product-oriented Mobile Engineer with 3+ years of experience working in a variety of fast-paced, dynamic, environments. Experience includes building and designing beautiful User interfaces, ensuring seamless user experiences, and optimizing app performance across platforms. Passionate about creating innovative mobile solutions that delight users and drive business value.",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: 16,
                               color: CustomColors.textDark,
                               height: 1.6,
                             ),
                           ),
-                          const SizedBox(height: 30),
+                          const SizedBox(height: 20),
                           _buildSocialLinks(),
                         ],
                       ),
@@ -127,65 +129,11 @@ class HomeScreen extends StatelessWidget {
             ),
 
             // Projects Preview Section
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 80),
-              decoration: BoxDecoration(
-                color: CustomColors.bgLight2,
-              ),
-              child: Column(
-                children: [
-                  Text(
-                    'Featured Projects',
-                    style: TextStyle(
-                      fontSize: 36,
-                      fontWeight: FontWeight.bold,
-                      color: CustomColors.primaryDark,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    'Here are some of my recent works',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: CustomColors.secondaryDark,
-                    ),
-                  ),
-                  const SizedBox(height: 50),
-                  //_buildProjectsPreview(context),
-                  const SizedBox(height: 30),
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //         builder: (context) => const ProjectsScreen(),
-                  //       ),
-                  //     );
-                  //   },
-                  //   style: ElevatedButton.styleFrom(
-                  //     backgroundColor: CustomColors.primaryDark,
-                  //     padding: const EdgeInsets.symmetric(
-                  //       horizontal: 30,
-                  //       vertical: 15,
-                  //     ),
-                  //     shape: RoundedRectangleBorder(
-                  //       borderRadius: BorderRadius.circular(10),
-                  //     ),
-                  //   ),
-                  //   child: const Text(
-                  //     'View All Projects',
-                  //     style: TextStyle(
-                  //       fontSize: 18,
-                  //       color: Colors.white,
-                  //     ),
-                  //   ),
-                  // ),
-                ],
-              ),
-            ),
+            ProjectsSection(),
+            ArticlesSection(),
 
             // Footer
-           // const Footer(),
+            const Footer(),
           ],
         ),
       ),
@@ -244,84 +192,75 @@ class HomeScreen extends StatelessWidget {
         ),
         itemCount: 2, // Show only 2 projects in preview
         itemBuilder: (context, index) {
-          return ProjectCard(
-            project: projects[index],
-            isPreview: true,
-          );
+          return Text('Hello');
+          //   ProjectCard(
+          //   project: projects[index],
+          //   isPreview: true,
+          // );
         },
       ),
     );
   }
 
-  // Widget _buildDrawer(BuildContext context) {
-  //   return Drawer(
-  //     child: ListView(
-  //       padding: EdgeInsets.zero,
-  //       children: [
-  //         const DrawerHeader(
-  //           decoration: BoxDecoration(
-  //             color: Colors.blue,
-  //           ),
-  //           child: Text(
-  //             'My Portfolio',
-  //             style: TextStyle(
-  //               color: Colors.white,
-  //               fontSize: 24,
-  //             ),
-  //           ),
-  //         ),
-  //         ListTile(
-  //           title: const Text('Home'),
-  //           onTap: () {
-  //             Navigator.pop(context);
-  //           },
-  //         ),
-  //         ListTile(
-  //           title: const Text('Projects'),
-  //           onTap: () {
-  //             Navigator.push(
-  //               context,
-  //               MaterialPageRoute(
-  //                 builder: (context) => const ProjectsScreen(),
-  //               ),
-  //             );
-  //           },
-  //         ),
-  //         ListTile(
-  //           title: const Text('Experience'),
-  //           onTap: () {
-  //             Navigator.push(
-  //               context,
-  //               MaterialPageRoute(
-  //                 builder: (context) => const ExperienceScreen(),
-  //               ),
-  //             );
-  //           },
-  //         ),
-  //         ListTile(
-  //           title: const Text('Blog'),
-  //           onTap: () {
-  //             Navigator.push(
-  //               context,
-  //               MaterialPageRoute(
-  //                 builder: (context) => const BlogScreen(),
-  //               ),
-  //             );
-  //           },
-  //         ),
-  //         ListTile(
-  //           title: const Text('Contact'),
-  //           onTap: () {
-  //             Navigator.push(
-  //               context,
-  //               MaterialPageRoute(
-  //                 builder: (context) => const ContactScreen(),
-  //               ),
-  //             );
-  //           },
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
+  Widget _buildDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+            ),
+            child: Text(
+              'My Portfolio',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+              ),
+            ),
+          ),
+          ListTile(
+            title: const Text('Home'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: const Text('Projects'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProjectsScreen(),
+                ),
+              );
+            },
+          ),
+
+          ListTile(
+            title: const Text('Blog'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BlogScreen(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            title: const Text('Contact'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ContactScreen(),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
 }

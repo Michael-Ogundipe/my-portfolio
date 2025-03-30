@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants/color.dart';
+import '../screens/projects_screen.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -12,7 +13,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
 
     return AppBar(
       title: const Text(
-        'My Portfolio',
+        'M.O',
         style: TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 24,
@@ -39,23 +40,15 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         const SizedBox(width: 20),
         TextButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/projects');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProjectsScreen(),
+              ),
+            );
           },
           child: Text(
             'Projects',
-            style: TextStyle(
-              color: CustomColors.textDark,
-              fontSize: 18,
-            ),
-          ),
-        ),
-        const SizedBox(width: 20),
-        TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/experience');
-          },
-          child: Text(
-            'Experience',
             style: TextStyle(
               color: CustomColors.textDark,
               fontSize: 18,

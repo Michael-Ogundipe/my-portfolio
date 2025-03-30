@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_portfolio/widgets/app_bar.dart';
-import 'package:flutter_portfolio/widgets/footer.dart';
-import 'package:flutter_portfolio/constants/colors.dart';
+
+import '../constants/color.dart';
+import '../widgets/app_bar.dart';
+import '../widgets/footer.dart';
 
 class ContactScreen extends StatelessWidget {
   const ContactScreen({super.key});
