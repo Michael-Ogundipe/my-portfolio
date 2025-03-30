@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:flutter_portfolio/widgets/footer.dart';
 // import 'package:flutter_portfolio/screens/projects_screen.dart';
 // import 'package:flutter_portfolio/screens/experience_screen.dart';
@@ -226,32 +227,32 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  // Widget _buildProjectsPreview(BuildContext context) {
-  //   final screenWidth = MediaQuery.of(context).size.width;
-  //   final isMobile = screenWidth < 600;
-  //
-  //   return SizedBox(
-  //     width: isMobile ? screenWidth * 0.9 : screenWidth * 0.8,
-  //     child: GridView.builder(
-  //       shrinkWrap: true,
-  //       physics: const NeverScrollableScrollPhysics(),
-  //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-  //         crossAxisCount: isMobile ? 1 : 2,
-  //         crossAxisSpacing: 20,
-  //         mainAxisSpacing: 20,
-  //         childAspectRatio: isMobile ? 1.2 : 1.5,
-  //       ),
-  //       itemCount: 2, // Show only 2 projects in preview
-  //       itemBuilder: (context, index) {
-  //         return ProjectCard(
-  //           project: projects[index],
-  //           isPreview: true,
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
-  //
+  Widget _buildProjectsPreview(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
+
+    return SizedBox(
+      width: isMobile ? screenWidth * 0.9 : screenWidth * 0.8,
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: isMobile ? 1 : 2,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+          childAspectRatio: isMobile ? 1.2 : 1.5,
+        ),
+        itemCount: 2, // Show only 2 projects in preview
+        itemBuilder: (context, index) {
+          return ProjectCard(
+            project: projects[index],
+            isPreview: true,
+          );
+        },
+      ),
+    );
+  }
+
   // Widget _buildDrawer(BuildContext context) {
   //   return Drawer(
   //     child: ListView(
