@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mie_portfolio/service/url_launcher.dart';
 
 import '../constants/color.dart';
 import '../screens/projects_screen.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +27,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? null
           : [
         TextButton(
-          onPressed: () {
-            // Already on home
-          },
+          onPressed: ()=> scrollToSection(homeKey),
           child: Text(
             'Home',
             style: TextStyle(
@@ -39,14 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         const SizedBox(width: 20),
         TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ProjectsScreen(),
-              ),
-            );
-          },
+          onPressed: ()=> scrollToSection(projectsKey),
           child: Text(
             'Projects',
             style: TextStyle(
@@ -57,9 +49,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         const SizedBox(width: 20),
         TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/blog');
-          },
+          onPressed: ()=> scrollToSection(articlesKey),
           child: Text(
             'Blog',
             style: TextStyle(
@@ -70,9 +60,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         ),
         const SizedBox(width: 20),
         TextButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/contact');
-          },
+          onPressed: ()=> scrollToSection(contactKey),
           child: Text(
             'Contact',
             style: TextStyle(

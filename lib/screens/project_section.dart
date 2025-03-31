@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../service/url_launcher.dart';
+import '../widgets/more_projects.dart';
 
 class ProjectsSection extends StatefulWidget {
   const ProjectsSection({Key? key}) : super(key: key);
@@ -135,6 +136,8 @@ class _ProjectsSectionState extends State<ProjectsSection>
               );
             },
           ),
+          const SizedBox(height: 36),
+          MoreProjectsWidget(title: 'Projects')
         ],
       ),
     );

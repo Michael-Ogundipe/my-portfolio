@@ -4,7 +4,7 @@ import 'package:mie_portfolio/screens/project_section.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/color.dart';
-import '../data/projects_data.dart';
+import '../service/url_launcher.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/footer.dart';
 import 'acticle_section.dart';
@@ -12,8 +12,16 @@ import 'blog_screen.dart';
 import 'contact_screen.dart';
 import 'projects_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+ final  _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +29,15 @@ class HomeScreen extends StatelessWidget {
     final isMobile = screenWidth < 600;
 
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar:  CustomAppBar(),
       drawer: isMobile ? _buildDrawer(context) : null,
       body: SingleChildScrollView(
+        controller: _scrollController,
         child: Column(
           children: [
             // Hero Section
             Container(
+              key: homeKey,
               padding: EdgeInsets.symmetric(
                 horizontal: isMobile ? 20 : 100,
                 vertical: 50,
@@ -129,11 +139,17 @@ class HomeScreen extends StatelessWidget {
             ),
 
             // Projects Preview Section
-            ProjectsSection(),
-            ArticlesSection(),
+            ProjectsSection(
+              key: projectsKey,
+            ),
+            ArticlesSection(
+              key: articlesKey,
+            ),
 
             // Footer
-            const Footer(),
+             Footer(
+              key: contactKey,
+            ),
           ],
         ),
       ),
@@ -206,32 +222,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildProjectsPreview(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 600;
-
-    return SizedBox(
-      width: isMobile ? screenWidth * 0.9 : screenWidth * 0.8,
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: isMobile ? 1 : 2,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
-          childAspectRatio: isMobile ? 1.2 : 1.5,
-        ),
-        itemCount: 2, // Show only 2 projects in preview
-        itemBuilder: (context, index) {
-          return Text('Hello');
-          //   ProjectCard(
-          //   project: projects[index],
-          //   isPreview: true,
-          // );
-        },
-      ),
-    );
-  }
 
   Widget _buildDrawer(BuildContext context) {
     return Drawer(
