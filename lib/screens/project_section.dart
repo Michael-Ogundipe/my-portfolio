@@ -4,7 +4,7 @@ import '../service/url_launcher.dart';
 import '../widgets/more_projects.dart';
 
 class ProjectsSection extends StatefulWidget {
-  const ProjectsSection({Key? key}) : super(key: key);
+  const ProjectsSection({super.key});
 
   @override
   _ProjectsSectionState createState() => _ProjectsSectionState();
@@ -409,10 +409,15 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
             borderRadius: BorderRadius.circular(8),
           ),
           child: Center(
-            child: Icon(
+            child: widget.project.imageAsset == null
+                ? Icon(
               Icons.image,
               size: 40,
               color: const Color(0xFF3498DB),
+            )
+                : Image.asset(
+              widget.project.imageAsset!,
+              fit: BoxFit.cover,
             ),
           ),
         ),
@@ -422,44 +427,30 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
         Text(
           widget.project.title,
           style: const TextStyle(
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Color(0xFF2D3E50),
-          ),
-        ),
-        const SizedBox(height: 4),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-          decoration: BoxDecoration(
-            color: const Color(0xFFECF0F1),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Text(
-            widget.project.projectType,
-            style: const TextStyle(
-              fontSize: 12,
-              color: Color(0xFF7F8C8D),
-            ),
           ),
         ),
         const SizedBox(height: 12),
         Text(
           widget.project.description,
           style: const TextStyle(
-            fontSize: 14,
+            fontSize: 16,
             color: Color(0xFF34495E),
             height: 1.5,
           ),
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
+
+        // Technologies
         Wrap(
           spacing: 8,
           runSpacing: 8,
           children: widget.project.technologies.map((tech) {
             return AnimatedContainer(
               duration: const Duration(milliseconds: 100),
-              transform: Matrix4.identity()
-                ..scale(_isHovered ? 1.05 : 1.0),
+              transform: Matrix4.identity()..scale(_isHovered ? 1.05 : 1.0),
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
@@ -472,7 +463,7 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
                 child: Text(
                   tech,
                   style: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     color: Color(0xFF3498DB),
                     fontWeight: FontWeight.w500,
                   ),
@@ -482,41 +473,62 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
           }).toList(),
         ),
         const SizedBox(height: 16),
-        SizedBox(
-          width: double.infinity,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 200),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              color: _isHovered
-                  ? const Color(0xFF2D3E50).withOpacity(0.9)
-                  : Colors.transparent,
+
+        // Conditional project type (both GitHub and website)
+        widget.project.projectType.contains('Both')
+            ? Row(
+          children: [
+            _buildOutlinedButton(
+              'App Store',
+              Icons.code,
+              widget.project.urls[0],
             ),
-            child: OutlinedButton.icon(
-              onPressed: () => _openGitHub(widget.project.urls[0]),
-              icon: Icon(
-                Icons.code,
-                size: 16,
-                color: _isHovered ? Colors.white : const Color(0xFF2D3E50),
-              ),
-              label: Text(
-                'See GitHub',
-                style: TextStyle(
-                  color: _isHovered ? Colors.white : const Color(0xFF2D3E50),
-                ),
-              ),
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(
-                  color: _isHovered
-                      ? Colors.transparent
-                      : const Color(0xFF2D3E50),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              ),
+            const SizedBox(width: 20),
+            _buildOutlinedButton(
+              'Google Play',
+              Icons.code,
+              widget.project.urls[1],
             ),
-          ),
+          ],
+        )
+            : _buildOutlinedButton(
+          widget.project.projectType == 'GitHub' ? 'GitHub' : 'Website',
+          Icons.code,
+          widget.project.urls[0],
         ),
       ],
+    );
+  }
+
+// Helper method to build the outlined buttons
+  Widget _buildOutlinedButton(
+      String label, IconData icon, String url) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(4),
+        color: _isHovered ? const Color(0xFF2D3E50).withOpacity(0.9) : Colors.transparent,
+      ),
+      child: OutlinedButton.icon(
+        onPressed: () => launchURl(url),
+        icon: Icon(
+          icon,
+          size: 16,
+          color: _isHovered ? Colors.white : const Color(0xFF2D3E50),
+        ),
+        label: Text(
+          label,
+          style: TextStyle(
+            color: _isHovered ? Colors.white : const Color(0xFF2D3E50),
+          ),
+        ),
+        style: OutlinedButton.styleFrom(
+          side: BorderSide(
+            color: _isHovered ? Colors.transparent : const Color(0xFF2D3E50),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        ),
+      ),
     );
   }
 

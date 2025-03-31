@@ -4,6 +4,7 @@ import 'package:mie_portfolio/screens/project_section.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/color.dart';
+import '../constants/strings.dart';
 import '../service/url_launcher.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/footer.dart';
@@ -27,6 +28,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 600;
+    final isBreakPoint = screenWidth < 830;
 
     return Scaffold(
       appBar:  CustomAppBar(),
@@ -42,45 +44,44 @@ class _HomeScreenState extends State<HomeScreen> {
                 horizontal: isMobile ? 20 : 100,
                 vertical: 50,
               ),
-              child: Row(
+              child: !isBreakPoint? Row(
                 children: [
-                  if (!isMobile) ...[
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Michael Ogundipe',
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: CustomColors.primaryDark,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            'Flutter Engineer',
-                            style: TextStyle(
-                              fontSize: 24,
-                              color: CustomColors.secondaryDark,
-                            ),
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            "I'm a skilled, and product-oriented Mobile Engineer with 3+ years of experience working in a variety of fast-paced, dynamic, environments. Experience includes building and designing beautiful User interfaces, ensuring seamless user experiences, and optimizing app performance across platforms. Passionate about creating innovative mobile solutions that delight users and drive business value.",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: CustomColors.textDark,
-                              height: 1.6,
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          SocialLinks(),
-                        ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Michael Ogundipe',
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                          color: CustomColors.primaryDark,
+                        ),
                       ),
-                    ),
-                    const SizedBox(width: 50),
-                    ClipRRect(
+                      const SizedBox(height: 8),
+                      Text(
+                        'Flutter Engineer',
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: CustomColors.secondaryDark,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        aboutMe,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: CustomColors.textDark,
+                          height: 1.6,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      SocialLinks(),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 50),
+                ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Image.asset(
                         'assets/images/profile.jpeg',
@@ -89,51 +90,48 @@ class _HomeScreenState extends State<HomeScreen> {
                         fit: BoxFit.cover,
                       ),
                     ),
-                  ] else ...[
-                    Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            'assets/images/profile.jpg',
-                            width: 250,
-                            height: 250,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(height: 30),
-                        Text(
-                          'Hi, I\'m John Doe',
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: CustomColors.primaryDark,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          'Building Scalable Flutter Apps with a Touch of AI',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: CustomColors.secondaryDark,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 30),
-                        Text(
-                          'I\'m a Flutter developer passionate about creating beautiful, performant mobile and web applications. With 3 years of experience, I specialize in cross-platform development and AI integration.',
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: CustomColors.textDark,
-                            height: 1.6,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 30),
-                        SocialLinks(),
-                      ],
+                ],
+              ): Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.asset(
+                      'assets/images/profile.jpeg',
+                      width: 250,
+                      height: 250,
+                      fit: BoxFit.cover,
                     ),
-                  ],
+                  ),
+                  const SizedBox(height: 30),
+                  Text(
+                    'Michael Ogundipe',
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: CustomColors.primaryDark,
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Flutter Engineer',
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: CustomColors.secondaryDark,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 30),
+                  Text(
+                    aboutMe,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: CustomColors.textDark,
+                      height: 1.6,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 30),
+                  SocialLinks(),
                 ],
               ),
             ),
