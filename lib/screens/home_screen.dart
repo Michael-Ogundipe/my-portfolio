@@ -161,52 +161,22 @@ class _HomeScreenState extends State<HomeScreen> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(
-              color: Colors.blue,
-            ),
-            child: Text(
-              'My Portfolio',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-              ),
-            ),
-          ),
           ListTile(
             title: const Text('Home'),
-            onTap: () {
-              Navigator.pop(context);
-            },
+            onTap: ()=> scrollToSection(homeKey),
           ),
           ListTile(
             title: const Text('Projects'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProjectsScreen(),
-                ),
-              );
-            },
+            onTap: ()=> scrollToSection(projectsKey),
           ),
 
           ListTile(
-            title: const Text('Blog'),
-            onTap: () {
-
-            },
+            title: const Text('Articles'),
+            onTap: ()=> scrollToSection(articlesKey),
           ),
           ListTile(
             title: const Text('Contact'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ContactScreen(),
-                ),
-              );
-            },
+            onTap: ()=> scrollToSection(contactKey),
           ),
         ],
       ),
