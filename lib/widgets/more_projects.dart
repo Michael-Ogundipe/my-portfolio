@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import '../service/url_launcher.dart';
 
 class MoreProjectsWidget extends StatelessWidget {
-  const MoreProjectsWidget({super.key, required this.title});
+  const MoreProjectsWidget({super.key, required this.title, required this.url});
 
   final String title;
+  final String url;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class MoreProjectsWidget extends StatelessWidget {
           const SizedBox(height: 24),
           // Button
           OutlinedButton(
-            onPressed: () =>launchURl('https://github.com/Michael-Ogundipe'),
+            onPressed: () =>launchURl(url),
             style: OutlinedButton.styleFrom(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(30),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mie_portfolio/service/url_launcher.dart';
 
+import '../widgets/more_projects.dart';
+
 class ArticlesSection extends StatefulWidget {
   const ArticlesSection({Key? key}) : super(key: key);
 
@@ -83,7 +85,7 @@ class _ArticlesSectionState extends State<ArticlesSection>
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: isMobile ? 20 : 100,
-        vertical: 50,
+        vertical: 0,
       ),
       color: Colors.grey[50],
       child: Column(
@@ -169,6 +171,10 @@ class _ArticlesSectionState extends State<ArticlesSection>
               );
             },
           ),
+
+          const SizedBox(height: 36),
+          MoreProjectsWidget(title: 'Articles',url: 'https://syntax007.hashnode.dev/'),
+          const SizedBox(height: 50),
         ],
       ),
     );

@@ -7,6 +7,7 @@ import '../constants/color.dart';
 import '../service/url_launcher.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/footer.dart';
+import '../widgets/social_links.dart';
 import 'acticle_section.dart';
 import 'contact_screen.dart';
 import 'projects_screen.dart';
@@ -74,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           const SizedBox(height: 20),
-                          _buildSocialLinks(),
+                          SocialLinks(),
                         ],
                       ),
                     ),
@@ -129,7 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 30),
-                        _buildSocialLinks(),
+                        SocialLinks(),
                       ],
                     ),
                   ],
@@ -155,71 +156,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildSocialLinks() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        IconButton(
-          icon: SvgPicture.asset('assets/svg/github.svg', width: 30),
-          onPressed: () async {
-            final Uri githubUrl = Uri.parse('https://github.com/Michael-Ogundipe');
-
-            if (await canLaunchUrl(githubUrl)) {
-              await launchUrl(githubUrl, mode: LaunchMode.externalApplication);
-            } else {
-              throw 'Could not launch $githubUrl';
-            }
-          },
-        ),
-        const SizedBox(width: 15),
-        IconButton(
-          icon: SvgPicture.asset('assets/svg/linkedin.svg', width: 30),
-          onPressed: () async {
-            final Uri githubUrl = Uri.parse('https://www.linkedin.com/in/michael-ogundipe-9a9b8b173/');
-
-            if (await canLaunchUrl(githubUrl)) {
-              await launchUrl(githubUrl, mode: LaunchMode.externalApplication);
-            } else {
-              throw 'Could not launch $githubUrl';
-            }
-          },
-        ),
-        const SizedBox(width: 15),
-        IconButton(
-          icon: SvgPicture.asset('assets/svg/gmail.svg', width: 30),
-          onPressed: () async {
-            final Uri emailUri = Uri(
-              scheme: 'mailto',
-              path: 'ogundipeibukun51@gmail.com',
-              queryParameters: {
-                'subject': 'Hello!',
-                'body': 'I wanted to reach out to you...',
-              },
-            );
-
-            if (await canLaunchUrl(emailUri)) {
-              await launchUrl(emailUri);
-            } else {
-              throw 'Could not launch $emailUri';
-            }
-          },
-        ),
-        const SizedBox(width: 15),
-        IconButton(
-          icon: SvgPicture.asset('assets/svg/x.svg', width: 30),
-          onPressed: () async {
-            final Uri githubUrl = Uri.parse('https://x.com/syntax007');
-
-            if (await canLaunchUrl(githubUrl)) {
-              await launchUrl(githubUrl, mode: LaunchMode.externalApplication);
-            } else {
-              throw 'Could not launch $githubUrl';
-            }
-          },
-        ),
-      ],
-    );
-  }
 
 
   Widget _buildDrawer(BuildContext context) {

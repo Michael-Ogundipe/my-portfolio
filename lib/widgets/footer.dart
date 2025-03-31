@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants/color.dart';
+import 'social_links.dart';
 
 class Footer extends StatelessWidget {
   const Footer({super.key});
@@ -30,9 +31,7 @@ class Footer extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/contact');
-            },
+            onPressed: ()=> Navigator.pushNamed(context, '/contact'),
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(
@@ -51,7 +50,9 @@ class Footer extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
+          Center(child: SocialLinks(isCentered: true)),
+          const SizedBox(height: 20),
           const Divider(
             color: Colors.white30,
             thickness: 1,
@@ -59,34 +60,8 @@ class Footer extends StatelessWidget {
             endIndent: 100,
           ),
           const SizedBox(height: 20),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                icon: const Icon(Icons.email, color: Colors.white),
-                onPressed: () {
-                  // Launch email
-                },
-              ),
-              const SizedBox(width: 20),
-              IconButton(
-                icon: const Icon(Icons.code, color: Colors.white),
-                onPressed: () {
-                  // Launch GitHub
-                },
-              ),
-              const SizedBox(width: 20),
-              IconButton(
-                icon: const Icon(Icons.work, color: Colors.white),
-                onPressed: () {
-                  // Launch LinkedIn
-                },
-              ),
-            ],
-          ),
-          const SizedBox(height: 20),
           const Text(
-            '© 2023 My Portfolio. All rights reserved.',
+            '© 2025 All rights reserved.',
             style: TextStyle(
               fontSize: 14,
               color: Colors.white70,
@@ -96,4 +71,5 @@ class Footer extends StatelessWidget {
       ),
     );
   }
+
 }

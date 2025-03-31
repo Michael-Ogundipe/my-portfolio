@@ -137,7 +137,7 @@ class _ProjectsSectionState extends State<ProjectsSection>
             },
           ),
           const SizedBox(height: 36),
-          MoreProjectsWidget(title: 'Projects')
+          MoreProjectsWidget(title: 'Projects', url: 'https://github.com/Michael-Ogundipe',)
         ],
       ),
     );
