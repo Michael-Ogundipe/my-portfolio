@@ -8,7 +8,6 @@ import '../service/url_launcher.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/footer.dart';
 import 'acticle_section.dart';
-import 'blog_screen.dart';
 import 'contact_screen.dart';
 import 'projects_screen.dart';
 
@@ -261,12 +260,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ListTile(
             title: const Text('Blog'),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const BlogScreen(),
-                ),
-              );
+
             },
           ),
           ListTile(

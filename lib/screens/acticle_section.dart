@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mie_portfolio/service/url_launcher.dart';
 
 class ArticlesSection extends StatefulWidget {
   const ArticlesSection({Key? key}) : super(key: key);
@@ -15,31 +16,31 @@ class _ArticlesSectionState extends State<ArticlesSection>
 
   final List<Article> _articles = [
     Article(
-      title: 'Building Responsive UIs with Flutter',
-      date: 'March 15, 2024',
-      summary: 'Learn how to create adaptive layouts that work across all screen sizes using Flutter\'s powerful layout system. This article covers MediaQuery, LayoutBuilder, and responsive design patterns.',
-      category: 'UI/UX',
+      title: 'Flutter Testing 101: How to Unit Test your Functions',
+      date: '',
+      summary: 'A beginner\'s guide to setting up and executing unit tests for your Flutter functions',
+      category: 'Testing',
       readTime: '5 min read',
-      imageAsset: 'assets/responsive_ui.jpg',
-      url: 'https://yourblog.com/responsive-ui-flutter',
+      imageAsset: 'assets/images/articleImg3.jpeg',
+      url: 'https://syntax007.hashnode.dev/flutter-testing-101-how-to-unit-test-your-functions',
     ),
     Article(
-      title: 'State Management Patterns in Flutter',
-      date: 'February 28, 2024',
-      summary: 'A comprehensive comparison of Provider, Bloc, and Riverpod for managing state in medium to large Flutter applications. Includes performance benchmarks and use case recommendations.',
-      category: 'Architecture',
-      readTime: '7 min read',
-      imageAsset: 'assets/state_management.jpg',
-      url: 'https://yourblog.com/state-management-flutter',
+      title: 'An Introduction to Design Patterns and Pattern Elements',
+      date: '',
+      summary: 'An excerpt and a summary of what I\'ve learned from the book Gang of Four: Design Patterns: Elements of Reusable Object-Oriented Software',
+      category: 'Design Patterns',
+      readTime: '4 min read',
+      imageAsset: 'assets/images/articleImg2.png',
+      url: 'https://syntax007.hashnode.dev/an-introduction-to-design-patterns-and-pattern-elements',
     ),
     Article(
-      title: 'Animations in Flutter: Beyond the Basics',
-      date: 'January 10, 2024',
-      summary: 'Take your Flutter animations to the next level with custom curved animations, hero transitions, and interactive gestures. Includes practical examples and performance tips.',
-      category: 'Animation',
-      readTime: '6 min read',
-      imageAsset: 'assets/animations.jpg',
-      url: 'https://yourblog.com/advanced-flutter-animations',
+      title: 'Consuming a REST API in Flutter using Retrofit - Auto Code Generator.',
+      date: '',
+      summary: 'Learn how to efficiently consume REST APIs in Flutter with the help of Retrofit, an auto code generator that simplifies the integration process and ensures seamless communication between your app and backend services.',
+      category: 'API Integration',
+      readTime: '3 min read',
+      imageAsset: 'assets/images/articleImg1.png',
+      url: 'https://syntax007.hashnode.dev/consuming-a-rest-api-in-flutter-using-retrofit-auto-code-generator',
     ),
   ];
 
@@ -218,7 +219,7 @@ class _AnimatedArticleCardState extends State<AnimatedArticleCard> {
           onTapDown: (_) => setState(() => _isTapped = true),
           onTapUp: (_) => setState(() => _isTapped = false),
           onTapCancel: () => setState(() => _isTapped = false),
-          onTap: () => _openArticle(context, widget.article.url),
+          onTap: () => launchURl(widget.article.url),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             transform: Matrix4.identity()
@@ -264,11 +265,7 @@ class _AnimatedArticleCardState extends State<AnimatedArticleCard> {
                             decoration: BoxDecoration(
                               color: Colors.blue[100],
                             ),
-                            child: Icon(
-                              Icons.article,
-                              size: 60,
-                              color: Colors.blue[300],
-                            ),
+                            child: Image.asset(widget.article.imageAsset!),
                           ),
                         ],
 
@@ -299,13 +296,6 @@ class _AnimatedArticleCardState extends State<AnimatedArticleCard> {
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold,
                                         ),
-                                      ),
-                                    ),
-                                    Text(
-                                      widget.article.date,
-                                      style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.grey[600],
                                       ),
                                     ),
                                   ],
@@ -426,15 +416,6 @@ class _AnimatedArticleCardState extends State<AnimatedArticleCard> {
     );
   }
 
-  void _openArticle(BuildContext context, String url) {
-    // In a real app, you would use url_launcher here
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Opening: $url'),
-        duration: const Duration(seconds: 1),
-      ),
-    );
-  }
 }
 
 class Article {
