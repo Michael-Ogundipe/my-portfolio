@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../service/url_launcher.dart';
+
 class ProjectsSection extends StatefulWidget {
   const ProjectsSection({Key? key}) : super(key: key);
 
@@ -13,25 +15,27 @@ class _ProjectsSectionState extends State<ProjectsSection>
   final List<Project> _projects = [
     Project(
       title: 'GemiLingo',
-      duration: 'Jan 2023 - Apr 2023',
+      projectType: 'GitHub',
+      imageAsset: 'assets/images/gemilingo.jpeg',
       description: 'A powerful AI-driven language translation app designed to break language barriers. Whether you\'re a traveler, a student, or a business professional, Gemilingo helps you communicate effortlessly with real-time translation features.',
       technologies: ['Flutter','Gemini AI'],
-      githubUrl: 'https://github.com/Michael-Ogundipe/gemilingo',
+      urls: ['https://github.com/Michael-Ogundipe/gemilingo'],
     ),
     Project(
       title: 'Heyflutter.com',
-      duration: 'Jun 2023 - Sep 2023',
-      description: 'Created a responsive task management system with drag-and-drop interface and team collaboration features.',
+      projectType: 'Website',
+      imageAsset: 'assets/images/heyflutter.png',
+      description: ' A responsive website built with Flutter, featuring a sleek UI, smooth animations and an intuitive user experience to highlight HeyFlutter\'s services and online Flutter training courses',
       technologies: ['Flutter', 'Firebase', 'TypeScript'],
-      githubUrl: 'https://heyflutter.com/',
+      urls: ['https://heyflutter.com/'],
     ),
     Project(
       title: 'Luxtrade',
-      duration: 'Nov 2023 - Feb 2024',
+      projectType: 'Both Stores',
+      imageAsset: 'assets/images/luxtrade.jpg',
       description: 'Your Gateway to Digital Finance and Exchange. Effortlessly trade crypto, pay bills, and receive international payments in Nigeria. Secure, fast, and user-friendly.',
       technologies: ['Flutter'],
-      githubUrl: 'https://github.com/yourusername/fitness-tracker',
-      // show links of the apps in the store
+      urls: ['https://apps.apple.com/ng/app/luxtrade/id6443710711','https://play.google.com/store/apps/details?id=com.lux.luxTrade&pcampaignid=web_share'],
     ),
   ];
 
@@ -206,10 +210,11 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: 24),
               Text(
                 widget.project.title,
                 style: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF2D3E50),
                 ),
@@ -218,12 +223,12 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
               Text(
                 widget.project.description,
                 style: const TextStyle(
-                  fontSize: 14,
+                  fontSize: 16,
                   color: Color(0xFF34495E),
                   height: 1.5,
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
               Wrap(
                 spacing: 8,
                 runSpacing: 8,
@@ -244,7 +249,7 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
                       child: Text(
                         tech,
                         style: const TextStyle(
-                          fontSize: 12,
+                          fontSize: 14,
                           color: Color(0xFF3498DB),
                           fontWeight: FontWeight.w500,
                         ),
@@ -253,24 +258,93 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
                   );
                 }).toList(),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 20),
+              widget.project.projectType.contains('Both')?
+              Row(
+                children: [
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: _isHovered
+                          ? const Color(0xFF2D3E50).withOpacity (0.9)
+                          : Colors.transparent,
+                    ),
+                    child: OutlinedButton.icon(
+                      onPressed: () =>launchURl(widget.project.urls[0]),
+                      icon: Icon(
+                        Icons.code,
+                        size: 16,
+                        color: _isHovered ? Colors.white : const Color(0xFF2D3E50),
+                      ),
+                      label: Text(
+                        'App Store',
+                        style: TextStyle(
+                          color: _isHovered ? Colors.white : const Color(0xFF2D3E50),
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(
+                          color: _isHovered
+                              ? Colors.transparent
+                              : const Color(0xFF2D3E50),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 20),
+                  AnimatedContainer(
+                    duration: const Duration(milliseconds: 200),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: _isHovered
+                          ? const Color(0xFF2D3E50).withOpacity (0.9)
+                          : Colors.transparent,
+                    ),
+                    child: OutlinedButton.icon(
+                      onPressed: () =>launchURl(widget.project.urls[1]),
+                      icon: Icon(
+                        Icons.code,
+                        size: 16,
+                        color: _isHovered ? Colors.white : const Color(0xFF2D3E50),
+                      ),
+                      label: Text(
+                        'Google Play',
+                        style: TextStyle(
+                          color: _isHovered ? Colors.white : const Color(0xFF2D3E50),
+                        ),
+                      ),
+                      style: OutlinedButton.styleFrom(
+                        side: BorderSide(
+                          color: _isHovered
+                              ? Colors.transparent
+                              : const Color(0xFF2D3E50),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                      ),
+                    ),
+                  )
+
+                ],
+              ):
               AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
                   color: _isHovered
-                      ? const Color(0xFF2D3E50).withOpacity(0.9)
+                      ? const Color(0xFF2D3E50).withOpacity (0.9)
                       : Colors.transparent,
                 ),
                 child: OutlinedButton.icon(
-                  onPressed: () => _openGitHub(widget.project.githubUrl),
+                  onPressed: () =>launchURl(widget.project.urls[0]),
                   icon: Icon(
                     Icons.code,
                     size: 16,
                     color: _isHovered ? Colors.white : const Color(0xFF2D3E50),
                   ),
                   label: Text(
-                    'See GitHub',
+                    widget.project.projectType == 'GitHub'? 'GitHub' : 'Website',
                     style: TextStyle(
                       color: _isHovered ? Colors.white : const Color(0xFF2D3E50),
                     ),
@@ -290,21 +364,26 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
         ),
 
         // Right side - Placeholder for project image
-        const SizedBox(width: 16),
+        const SizedBox(width: 40),
         Expanded(
           flex: 2,
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
-            height: 180,
+            height: 300,
             decoration: BoxDecoration(
               color: const Color(0xFF3498DB).withOpacity(_isHovered ? 0.2 : 0.1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
-              child: Icon(
+              child: widget.project.imageAsset == null? Icon(
                 Icons.image,
                 size: 40,
                 color: const Color(0xFF3498DB),
+              ) : Image.asset(widget.project.imageAsset!,
+
+                //width: 150,
+               // height: double.infinity,
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -353,7 +432,7 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
             borderRadius: BorderRadius.circular(12),
           ),
           child: Text(
-            widget.project.duration,
+            widget.project.projectType,
             style: const TextStyle(
               fontSize: 12,
               color: Color(0xFF7F8C8D),
@@ -411,7 +490,7 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
                   : Colors.transparent,
             ),
             child: OutlinedButton.icon(
-              onPressed: () => _openGitHub(widget.project.githubUrl),
+              onPressed: () => _openGitHub(widget.project.urls[0]),
               icon: Icon(
                 Icons.code,
                 size: 16,
@@ -445,18 +524,18 @@ class _HoverProjectCardState extends State<HoverProjectCard> {
 
 class Project {
   final String title;
-  final String duration;
+  final String projectType;
   final String description;
   final List<String> technologies;
   final String? imageAsset;
-  final String githubUrl;
+  final List<String> urls;
 
   Project({
     required this.title,
-    required this.duration,
+    required this.projectType,
     required this.description,
     required this.technologies,
     this.imageAsset,
-    required this.githubUrl,
+    required this.urls,
   });
 }
