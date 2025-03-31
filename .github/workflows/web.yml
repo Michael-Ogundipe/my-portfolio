@@ -9,6 +9,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2 # Only works with v2
+      # Checkout the repository
+      - uses: actions/checkout@v2
+
+      # Set up Flutter environment
       - uses: subosito/flutter-action@v1
+
+      # Install dependencies
+      - run: flutter pub get
+
+      # Build the Flutter web app for production (remove --web-renderer as it's no longer needed)
+      - run: flutter build web --release --base-href /my-portfolio/
+
+      # Deploy the web app to GitHub Pages
       - uses: bluefireteam/flutter-gh-pages@v7
+        with:
+          baseHref: '/my-portfolio/'

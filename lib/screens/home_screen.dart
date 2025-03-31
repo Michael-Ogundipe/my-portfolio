@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mie_portfolio/screens/project_section.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import '../constants/color.dart';
 import '../constants/strings.dart';
@@ -10,8 +8,6 @@ import '../widgets/app_bar.dart';
 import '../widgets/footer.dart';
 import '../widgets/social_links.dart';
 import 'acticle_section.dart';
-import 'contact_screen.dart';
-import 'projects_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
