@@ -80,10 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 ClipRRect(
                       borderRadius: BorderRadius.circular(20),
                       child: Image.asset(
-                        'assets/images/profile.jpeg',
+                        'assets/images/profile_headshot.jpg',
                         width: 350,
                         height: 350,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ),
                 ],
@@ -92,10 +92,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Image.asset(
-                      'assets/images/profile.jpeg',
+                      'assets/images/profile_headshot.jpg',
                       width: 250,
                       height: 250,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.contain,
                     ),
                   ),
                   const SizedBox(height: 30),
